@@ -35,6 +35,7 @@
             this.guardarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.guardarComoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cerrarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nuevoToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.editarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.copiarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cortarToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -44,10 +45,15 @@
             this.BotonGuardar = new System.Windows.Forms.ToolStripButton();
             this.BotonGuardarComo = new System.Windows.Forms.ToolStripButton();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
+            this.nuevoButon = new System.Windows.Forms.ToolStripButton();
+            this.AbrirButon = new System.Windows.Forms.ToolStripButton();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.BotonBuscar = new System.Windows.Forms.ToolStripButton();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
             this.menuStrip1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -69,7 +75,8 @@
             this.nuevoToolStripMenuItem,
             this.guardarToolStripMenuItem,
             this.guardarComoToolStripMenuItem,
-            this.cerrarToolStripMenuItem});
+            this.cerrarToolStripMenuItem,
+            this.nuevoToolStripMenuItem1});
             this.MenuArchivo.Name = "MenuArchivo";
             this.MenuArchivo.Size = new System.Drawing.Size(77, 25);
             this.MenuArchivo.Text = "Archivo";
@@ -102,6 +109,13 @@
             this.cerrarToolStripMenuItem.Text = "Cerrar";
             this.cerrarToolStripMenuItem.Click += new System.EventHandler(this.cerrarToolStripMenuItem_Click);
             // 
+            // nuevoToolStripMenuItem1
+            // 
+            this.nuevoToolStripMenuItem1.Name = "nuevoToolStripMenuItem1";
+            this.nuevoToolStripMenuItem1.Size = new System.Drawing.Size(197, 26);
+            this.nuevoToolStripMenuItem1.Text = "Nuevo";
+            this.nuevoToolStripMenuItem1.Click += new System.EventHandler(this.nuevoToolStripMenuItem1_Click);
+            // 
             // editarToolStripMenuItem
             // 
             this.editarToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -116,7 +130,7 @@
             // copiarToolStripMenuItem
             // 
             this.copiarToolStripMenuItem.Name = "copiarToolStripMenuItem";
-            this.copiarToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.copiarToolStripMenuItem.Size = new System.Drawing.Size(140, 26);
             this.copiarToolStripMenuItem.Text = "Copiar";
             this.copiarToolStripMenuItem.Click += new System.EventHandler(this.copiarToolStripMenuItem_Click);
             // 
@@ -125,22 +139,28 @@
             this.cortarToolStripMenuItem.Name = "cortarToolStripMenuItem";
             this.cortarToolStripMenuItem.Size = new System.Drawing.Size(140, 26);
             this.cortarToolStripMenuItem.Text = "Cortar";
+            this.cortarToolStripMenuItem.Click += new System.EventHandler(this.cortarToolStripMenuItem_Click);
             // 
             // pegarToolStripMenuItem
             // 
             this.pegarToolStripMenuItem.Name = "pegarToolStripMenuItem";
             this.pegarToolStripMenuItem.Size = new System.Drawing.Size(140, 26);
             this.pegarToolStripMenuItem.Text = "Pegar";
+            this.pegarToolStripMenuItem.Click += new System.EventHandler(this.pegarToolStripMenuItem_Click);
             // 
             // bucarToolStripMenuItem
             // 
             this.bucarToolStripMenuItem.Name = "bucarToolStripMenuItem";
             this.bucarToolStripMenuItem.Size = new System.Drawing.Size(140, 26);
-            this.bucarToolStripMenuItem.Text = "Bucar";
+            this.bucarToolStripMenuItem.Text = "Buscar";
+            this.bucarToolStripMenuItem.Click += new System.EventHandler(this.bucarToolStripMenuItem_Click);
             // 
             // statusStrip1
             // 
             this.statusStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.toolStripStatusLabel2});
             this.statusStrip1.Location = new System.Drawing.Point(0, 428);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(800, 22);
@@ -154,7 +174,7 @@
             this.BotonGuardar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.BotonGuardar.Name = "BotonGuardar";
             this.BotonGuardar.Size = new System.Drawing.Size(29, 24);
-            this.BotonGuardar.Text = "toolStripButton1";
+            this.BotonGuardar.Text = "Guardar";
             this.BotonGuardar.Click += new System.EventHandler(this.BotonGuardar_Click);
             // 
             // BotonGuardarComo
@@ -164,13 +184,15 @@
             this.BotonGuardarComo.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.BotonGuardarComo.Name = "BotonGuardarComo";
             this.BotonGuardarComo.Size = new System.Drawing.Size(29, 24);
-            this.BotonGuardarComo.Text = "toolStripButton2";
+            this.BotonGuardarComo.Text = "Guardar Como";
             this.BotonGuardarComo.Click += new System.EventHandler(this.toolStripButton2_Click);
             // 
             // toolStrip1
             // 
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.nuevoButon,
+            this.AbrirButon,
             this.BotonGuardar,
             this.BotonGuardarComo,
             this.toolStripSeparator1,
@@ -180,6 +202,26 @@
             this.toolStrip1.Size = new System.Drawing.Size(800, 27);
             this.toolStrip1.TabIndex = 3;
             this.toolStrip1.Text = "toolStrip1";
+            // 
+            // nuevoButon
+            // 
+            this.nuevoButon.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.nuevoButon.Image = ((System.Drawing.Image)(resources.GetObject("nuevoButon.Image")));
+            this.nuevoButon.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.nuevoButon.Name = "nuevoButon";
+            this.nuevoButon.Size = new System.Drawing.Size(29, 24);
+            this.nuevoButon.Text = "Nuevo";
+            this.nuevoButon.Click += new System.EventHandler(this.nuevoButon_Click);
+            // 
+            // AbrirButon
+            // 
+            this.AbrirButon.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.AbrirButon.Image = ((System.Drawing.Image)(resources.GetObject("AbrirButon.Image")));
+            this.AbrirButon.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.AbrirButon.Name = "AbrirButon";
+            this.AbrirButon.Size = new System.Drawing.Size(29, 24);
+            this.AbrirButon.Text = "Abrir";
+            this.AbrirButon.Click += new System.EventHandler(this.AbrirButon_Click);
             // 
             // toolStripSeparator1
             // 
@@ -193,7 +235,8 @@
             this.BotonBuscar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.BotonBuscar.Name = "BotonBuscar";
             this.BotonBuscar.Size = new System.Drawing.Size(29, 24);
-            this.BotonBuscar.Text = "toolStripButton1";
+            this.BotonBuscar.Text = "Buscar";
+            this.BotonBuscar.Click += new System.EventHandler(this.BotonBuscar_Click);
             // 
             // richTextBox1
             // 
@@ -203,6 +246,17 @@
             this.richTextBox1.Size = new System.Drawing.Size(800, 372);
             this.richTextBox1.TabIndex = 4;
             this.richTextBox1.Text = "";
+            this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            this.toolStripStatusLabel1.Size = new System.Drawing.Size(0, 21);
+            // 
+            // toolStripStatusLabel2
+            // 
+            this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+            this.toolStripStatusLabel2.Size = new System.Drawing.Size(0, 18);
             // 
             // Form1
             // 
@@ -220,6 +274,8 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             this.ResumeLayout(false);
@@ -246,6 +302,11 @@
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripButton BotonBuscar;
+        private System.Windows.Forms.ToolStripButton nuevoButon;
+        private System.Windows.Forms.ToolStripMenuItem nuevoToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripButton AbrirButon;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
     }
 }
 

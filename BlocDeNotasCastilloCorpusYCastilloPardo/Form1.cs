@@ -21,7 +21,14 @@ namespace BlocDeNotasCastilloCorpusYCastilloPardo
         string NameFile;
         bool isColosing = false;
 
+        public string search;
+
         public int bandera = 0;
+        public String PalBuscar;
+
+        public int cont = 0;
+
+        //List<int> Palabras;
         public Form1()
         {
             InitializeComponent();
@@ -35,8 +42,9 @@ namespace BlocDeNotasCastilloCorpusYCastilloPardo
 
         }
 
-        private void nuevoToolStripMenuItem_Click(object sender, EventArgs e)
+        private void abrir()
         {
+            toolStripStatusLabel2.Text = "Abriendo";
             OpenFileDialog ofd = new OpenFileDialog();
 
             ofd.Filter = "Archivos de texto|*.txt";
@@ -48,6 +56,11 @@ namespace BlocDeNotasCastilloCorpusYCastilloPardo
                 richTextBox1.Text = File.ReadAllText(ofd.FileName);
                 NameFile = ofd.FileName;
             }
+        }
+
+        private void nuevoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            abrir();
         }
 
         private void guardarToolStripMenuItem_Click(object sender, EventArgs e)
@@ -69,7 +82,7 @@ namespace BlocDeNotasCastilloCorpusYCastilloPardo
         {
             SaveFileDialog safeFileDailog = new SaveFileDialog();
 
-            safeFileDailog.Filter = "Archivos de texto|*.txt";
+            safeFileDailog.Filter = "Archivos de texto |*.txt";
             safeFileDailog.AddExtension = true;
 
             if (safeFileDailog.ShowDialog() == DialogResult.OK)
@@ -83,9 +96,10 @@ namespace BlocDeNotasCastilloCorpusYCastilloPardo
         {
             if (NameFile == null)
             {
-                NameFile = richTextBox1.Lines.FirstOrDefault();
+                /*NameFile = richTextBox1.Lines.FirstOrDefault();
                 string ArchNom = Environment.GetFolderPath(Environment.SpecialFolder.Desktop) + "\\" + NameFile + ".txt";
-                File.WriteAllText(ArchNom, richTextBox1.Text);
+                File.WriteAllText(ArchNom, richTextBox1.Text);*/
+                GuardarComo();
             }
             else
             {
@@ -111,7 +125,8 @@ namespace BlocDeNotasCastilloCorpusYCastilloPardo
 
         private void Cerrar ()
         {
-            if(string.IsNullOrEmpty(NameFile))
+            toolStripStatusLabel2.Text = "Cerrando";
+            if (string.IsNullOrEmpty(NameFile))
             {
                 if (richTextBox1.Text != "")
                 {
@@ -119,6 +134,13 @@ namespace BlocDeNotasCastilloCorpusYCastilloPardo
 
                     if (bandera > 0)
                         GuardarComo();
+                    else
+                        if(bandera != 0)
+                    {
+                        isColosing = true;
+                        this.Close();
+                    }
+                    
                 }
             }
             else
@@ -130,11 +152,15 @@ namespace BlocDeNotasCastilloCorpusYCastilloPardo
 
                     if (bandera > 0)
                         Guardar();
-                    
+                    else
+                        if (bandera != 0)
+                    {
+                        isColosing = true;
+                        this.Close();
+                    }
                 }
             }
-            isColosing = true;
-            this.Close();
+            
 
 
         }
@@ -146,7 +172,127 @@ namespace BlocDeNotasCastilloCorpusYCastilloPardo
 
         private void copiarToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //MessageBox.Show( richTextBox1.Text.s);
+            richTextBox1.Copy();
+        }
+
+        private void pegarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Paste();
+        }
+
+        private void cortarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            richTextBox1.Cut();
+        }
+
+        private void bucarToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            buscar();
+        }
+
+        private void nuevoToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            nuevo();
+        }
+        private void buscar()
+        {
+            Form2 form2 = new Form2(this);
+            form2.Show();
+
+
+            /*if(PalBuscar != null)
+                richTextBox1.Find(PalBuscar, 0, 0);*/
+
+        }
+        public int AAA(string palabra, int length)
+        {
+            int index;
+            toolStripStatusLabel2.Text = "Buscando";
+
+            //richTextBox1.Find(palabra);
+
+            if (cont < richTextBox1.TextLength)
+            {
+                index = richTextBox1.Text.IndexOf(palabra, cont);
+            }
+            else
+            {
+                cont = 0;
+                index = richTextBox1.Text.IndexOf(palabra, cont);
+            }
+                
+            
+            //Palabras.Add(index);
+
+            richTextBox1.Select(index, length);
+
+            return index;
+            
+        }
+        private void nuevo()
+        {
+            toolStripStatusLabel2.Text = "Abriendo Nuevo Archivo";
+            if (string.IsNullOrEmpty(NameFile))
+            {
+                if (richTextBox1.Text != "")
+                {
+                    nueva_form.ShowDialog();
+
+                    if (bandera > 0)
+                        GuardarComo();
+                    else
+                        if (bandera != 0)
+                    {
+                        richTextBox1.Clear();
+                        NameFile = "";
+                    }
+
+                }
+            }
+            else
+            {
+                if (richTextBox1.Text != File.ReadAllText(NameFile))
+                {
+                    nueva_form.ShowDialog();
+                    nueva_form.Close();
+
+                    if (bandera > 0)
+                        Guardar();
+                    else
+                        if (bandera != 0)
+                    {
+                        richTextBox1.Clear();
+                        NameFile = "";
+                    }
+                }
+            }
+            richTextBox1.Clear();
+            NameFile = "";
+
+        }
+
+        private void nuevoButon_Click(object sender, EventArgs e)
+        {
+            nuevo();
+        }
+
+        private void AbrirButon_Click(object sender, EventArgs e)
+        {
+            abrir();
+        }
+
+        private void BotonBuscar_Click(object sender, EventArgs e)
+        {
+            buscar();
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            toolStripStatusLabel1.Text = " Numero de Caracteres: "+richTextBox1.TextLength.ToString();
+            //statusStrip1.Text = "Hola";
+
+            //statusStrip1.Text = richTextBox1.TextLength.ToString();
         }
     }
 }
